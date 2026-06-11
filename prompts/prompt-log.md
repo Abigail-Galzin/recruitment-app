@@ -17,3 +17,18 @@ Implement the database schema required for @file:user-stories.md User Story 1 (R
 
 
 Using the @file:connection.ts and following the @file:schema.ts Implement User Story 1(Candidate Registration) completely in the backend. Create endpoint POST /api/candidates that accepts multipart/form-data with all candidate fields + a PDF. Use multer middleware (file max 5MB, only PDF). Save the file to public/uploads/ with a UUID name. Insert into CANDIDATE and CV_DOCUMENT tables. Validate: age 18-99, email format, phone E.164, file required. Return 201 with candidate ID. Write the route in routes/candidates.ts, controller in controllers/candidateController.ts, model in models/Candidate.ts and models/CVDocument.ts, Also add the respective new routes in the @file:index.ts . After success, the candidate’s status should be ‘IN_REVIEW’ as per the story.
+
+
+### Frontend chat 
+Following the current structure for frontend, and the respective @file:planning.md Implement User Story 1 (Candidate Registration) completely in the frontend.
+Create @sym:RegistrationPage  that renders the RegistrationForm component.
+In src/components/RegistrationForm/RegistrationForm.tsx:
+
+Build a responsive form with fields: name, email, phone, age, country, city, dropdown for English level (A1, A2, B1, B2, C1, C2), and a file input for PDF (mandatory).
+Add client‑side validation: all fields required, email format, age 18‑99, file must be .pdf and ≤5MB.
+On submit, send multipart/form-data to POST /api/candidates using axios (use src/api/candidateApi.ts).
+Show loading spinner (LoadingSpinner component), success message, and error messages.
+Use RegistrationForm.module.css for styling (mobile‑first CSS Grid or Flex).
+After successful registration, clear the form or redirect to a thank‑you page.
+Also create src/api/apiClient.ts with a configured axios instance pointing to http://localhost:5000.
+Write the necessary TypeScript types in src/types/index.ts matching the backend response.
