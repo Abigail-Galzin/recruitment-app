@@ -5,34 +5,57 @@
 
 import sqlite3 from 'sqlite3';
 import path from 'path';
-import { initializeSchema } from './schema';
+import { initializeSchema } from './schema.js';
+import { fileURLToPath } from 'url';
 
 let dbInstance: sqlite3.Database | null = null;
 
+const getDbPath = (): string => {
+  const currentDir = path.dirname(fileURLToPath(import.meta.url));
+  return path.join(currentDir, '../../data/recruitment.db');
+};
+
+const openDatabase = (): Promise<sqlite3.Database> => {
+  return new Promise((resolve, reject) => {
+    const db = new sqlite3.Database(getDbPath(), (err: Error | null) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(db);
+      }
+    });
+  });
+};
+
 /**
- * Get or create the database connection (singleton pattern)
+ * Open the database connection and initialize schema tables on startup
+ */
+export const initializeDatabase = async (): Promise<void> => {
+  if (dbInstance) {
+    return;
+  }
+
+  const dbPath = getDbPath();
+
+  try {
+    dbInstance = await openDatabase();
+    console.log(`✓ Connected to SQLite database at ${dbPath}`);
+    //dbInstance.run('PRAGMA foreign_keys = ON;');
+    await initializeSchema(dbInstance);
+  } catch (error) {
+    dbInstance = null;
+    throw error;
+  }
+};
+
+/**
+ * Get the database connection (singleton pattern)
  * @returns SQLite database connection instance
  */
 export const getDatabase = (): sqlite3.Database => {
-  if (dbInstance) {
-    return dbInstance;
+  if (!dbInstance) {
+    throw new Error('Database not initialized. Call initializeDatabase() before using the database.');
   }
-
-  const dbPath = path.join(__dirname, '../../data/recruitment.db');
-
-  dbInstance = new sqlite3.Database(dbPath, (err: Error | null) => {
-    if (err) {
-      console.error('✗ Error opening database:', err.message);
-      throw err;
-    }
-    console.log(`✓ Connected to SQLite database at ${dbPath}`);
-  });
-
-  // Enable foreign key constraints
-  dbInstance.run('PRAGMA foreign_keys = ON;');
-
-  // Initialize schema
-  initializeSchema(dbInstance);
 
   return dbInstance;
 };

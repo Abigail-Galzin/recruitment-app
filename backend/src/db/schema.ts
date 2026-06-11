@@ -1,3 +1,4 @@
+import sqlite3 from 'sqlite3';
 /**
  * Database Schema Definitions
  * SQLite table definitions for CANDIDATE and CV_DOCUMENT
@@ -51,26 +52,42 @@ export const CREATE_INDICES = `
  * Creates tables and indices if they don't already exist
  * @param db SQLite database connection
  */
-export const initializeSchema = (db: any): void => {
-  try {
-    // Enable foreign keys
-    db.run('PRAGMA foreign_keys = ON;');
+export const initializeSchema = (db: sqlite3.Database): Promise<void> => {
 
-    // Create tables
-    db.run(CANDIDATE_TABLE);
-    db.run(CV_DOCUMENT_TABLE);
+  return new Promise((resolve, reject) => {
+    db.serialize(() => {
+      db.run('PRAGMA foreign_keys = ON;', (err) => {
+        if (err) return reject(new Error(`Error en PRAGMA: ${err.message}`));
+      });
 
-    // Create indices for better query performance
-    const indices = CREATE_INDICES.split(';').filter((stmt: string) => stmt.trim());
-    indices.forEach((index: string) => {
-      if (index.trim()) {
-        db.run(index);
-      }
-    });
+      db.run(CANDIDATE_TABLE, (err) => {
+        if (err) return reject(new Error(`Error creando CANDIDATE: ${err.message}`));
+      });
 
-    console.log('✓ Database schema initialized successfully');
-  } catch (error) {
-    console.error('✗ Error initializing database schema:', error);
-    throw error;
-  }
+      db.run(CV_DOCUMENT_TABLE, (err) => {
+        if (err) return reject(new Error(`Error creando CV_DOCUMENT: ${err.message}`));
+      });
+
+      const indices = CREATE_INDICES.split(';').filter((stmt: string) => stmt.trim());
+
+      let indexError: Error | null = null;
+
+      indices.forEach((indexStmt: string) => {
+        if (indexStmt.trim() && !indexError) {
+          db.run(indexStmt, (err) => {
+            if (err) indexError = err;
+          });
+        }
+      });
+      db.run('SELECT 1;', (err) => {
+        if (err || indexError) {
+          console.error('✗ Error initializing database schema');
+          reject(indexError || err);
+        } else {
+          console.log('✓ Database schema initialized successfully');
+          resolve();
+        }
+      });
+    })
+  });
 };
