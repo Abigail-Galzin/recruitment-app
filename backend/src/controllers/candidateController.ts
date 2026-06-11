@@ -93,7 +93,6 @@ export class CandidateController {
       const candidates = await this.candidateService.getAllCandidates(filters);
 
       res.status(200).json({
-        success: true,
         data: candidates,
       });
     } catch (error) {
