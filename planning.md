@@ -12,32 +12,32 @@
 ### Database Setup
 - [x] Create folder structure for backend and frontend
 - [x] Install backend dependencies (express, sqlite3, multer, dotenv, uuid)
-- [ ] Create `.env` configuration for backend (database path, port, upload directory)
-- [ ] Implement SQLite connection setup (`backend/src/db/connection.ts`)
-- [ ] Create database schema initialization (`backend/src/db/schema.ts`) with CANDIDATE and CV_DOCUMENT tables
-- [ ] Set up database migrations structure (`backend/src/db/migrations/`)
+- [x] Create `.env` configuration for backend (database path, port, upload directory)
+- [x] Implement SQLite connection setup (`backend/src/db/connection.ts`)
+- [x] Create database schema initialization (`backend/src/db/schema.ts`) with CANDIDATE and CV_DOCUMENT tables
+- [x] Set up database migrations structure (`backend/src/db/migrations/`)
 
 ### API Endpoints - Core Implementation
 - [ ] Define shared TypeScript types and interfaces (`backend/src/types/index.ts`)
 - [ ] Create validation schemas for candidate data (`backend/src/validators/schemas.ts`, `candidateValidator.ts`)
 - [ ] Implement error handling middleware (`backend/src/middleware/errorHandler.ts`)
-- [ ] Implement upload middleware with multer config (`backend/src/middleware/uploadMiddleware.ts`)
-- [ ] Create data models for Candidate and CVDocument (`backend/src/models/`)
+- [X] Implement upload middleware with multer config (`backend/src/middleware/uploadMiddleware.ts`)
+- [X] Create data models for Candidate and CVDocument (`backend/src/models/`)
 
 ### API Endpoint: POST /api/candidates
-- [ ] Implement candidate controller - create candidate (`backend/src/controllers/candidateController.ts`)
-- [ ] Implement file upload logic with validation (PDF only, max 5MB)
-- [ ] Store candidate record with UUIDv4 primary key
-- [ ] Create CV_DOCUMENT metadata record linked to candidate
-- [ ] Set initial status to `IN_REVIEW`
-- [ ] Implement route handler (`backend/src/routes/candidates.ts`)
+- [X] Implement candidate controller - create candidate (`backend/src/controllers/candidateController.ts`)
+- [X] Implement file upload logic with validation (PDF only, max 5MB)
+- [X] Store candidate record with UUIDv4 primary key
+- [X] Create CV_DOCUMENT metadata record linked to candidate
+- [X] Set initial status to `IN_REVIEW`
+- [X] Implement route handler (`backend/src/routes/candidates.ts`)
 
 ### API Endpoint: GET /api/candidates
-- [ ] Implement candidate retrieval controller with filtering logic
+- [X] Implement candidate retrieval controller with filtering logic
 - [ ] Support optional query filters: `country`, `city`, `english_level`
-- [ ] Join candidate records with CV document metadata
-- [ ] Return full candidate profiles with file information
-- [ ] Implement route handler with query parameter parsing
+- [X] Join candidate records with CV document metadata
+- [X] Return full candidate profiles with file information
+- [X] Implement route handler with query parameter parsing
 
 ### API Endpoint: PUT /api/candidates/:id/status
 - [ ] Implement status update controller with validation
