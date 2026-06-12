@@ -1,8 +1,50 @@
-import { useFilters } from '../../hooks/useFilters';
+import { useEffect, useRef } from 'react';
 import styles from './AdminPanel.module.css';
+import type { CandidateFilters } from '../../hooks/useFilters';
 
-export default function FilterControls() {
-  const { filters, setCountry, setCity, setEnglishLevel, resetFilters } = useFilters();
+interface FilterControlsProps {
+  filters: CandidateFilters;
+  setCountry: (country: string) => void;
+  setCity: (city: string) => void;
+  setEnglishLevel: (level: string) => void;
+  resetFilters: () => void;
+}
+
+const DEBOUNCE_DELAY = 500;
+
+export const FilterControls: React.FC<FilterControlsProps> = ({
+  filters,
+  setCountry,
+  setCity,
+  setEnglishLevel,
+  resetFilters
+}) => {
+  const countryTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const cityTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const handleCountryChange = (value: string) => {
+    if (countryTimeoutRef.current) clearTimeout(countryTimeoutRef.current);
+
+    countryTimeoutRef.current = setTimeout(() => {
+      setCountry(value);
+    }, DEBOUNCE_DELAY);
+  };
+
+  const handleCityChange = (value: string) => {
+    if (cityTimeoutRef.current) clearTimeout(cityTimeoutRef.current);
+
+    cityTimeoutRef.current = setTimeout(() => {
+      setCity(value);
+    }, DEBOUNCE_DELAY);
+  };
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (countryTimeoutRef.current) clearTimeout(countryTimeoutRef.current);
+      if (cityTimeoutRef.current) clearTimeout(cityTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <div className={styles.filterCon}>
@@ -15,8 +57,9 @@ export default function FilterControls() {
             id="country-filter"
             type="text"
             placeholder="Filter by country"
-            value={filters.country || ''}
-            onChange={(e) => setCountry(e.target.value)}
+            key={filters.country}
+            defaultValue={filters.country || ''} 
+            onChange={(e) => handleCountryChange(e.target.value)}
             className={styles.filters}
           />
         </div>
@@ -29,8 +72,9 @@ export default function FilterControls() {
             id="city-filter"
             type="text"
             placeholder="Filter by city"
-            value={filters.city || ''}
-            onChange={(e) => setCity(e.target.value)}
+            key={filters.city}
+            defaultValue={filters.city || ''} 
+            onChange={(e) => handleCityChange(e.target.value)}
             className={styles.filters}
           />
         </div>

@@ -1,11 +1,20 @@
 import { useCandidates } from '../../hooks/useCandidates';
+import { useFilters } from '../../hooks/useFilters';
 import CandidateTable from './CandidateTable';
+import {FilterControls} from './FilterControls';
 import LoadingSpinner from '../Common/LoadingSpinner';
 import ErrorAlert from '../Common/ErrorAlert';
 import styles from './AdminPanel.module.css';
 
 export default function AdminPanel() {
-  const { candidates, isLoading, error, refetch } = useCandidates();
+  const { 
+    filters, 
+    setCountry, 
+    setCity, 
+    setEnglishLevel, 
+    resetFilters 
+  } = useFilters();
+  const { candidates, isLoading, error, refetch } = useCandidates(filters);
 
   return (
     <div className={styles.adminContainer}>
@@ -22,6 +31,14 @@ export default function AdminPanel() {
           onDismiss={refetch}
         />
       )}
+
+      <FilterControls
+        filters={filters}
+        setCountry={setCountry}
+        setCity={setCity}
+        setEnglishLevel={setEnglishLevel}
+        resetFilters={resetFilters}
+      />
 
       {isLoading ? (
         <div className={styles.loadingContainer}>

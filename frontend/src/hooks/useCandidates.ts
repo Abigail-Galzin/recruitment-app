@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { CandidateWithCV } from '../types';
+import type { CandidateFilters } from './useFilters';
 import candidateApi from '../api/candidateApi';
 
 interface UseCandidatesReturn {
@@ -9,7 +10,7 @@ interface UseCandidatesReturn {
   refetch: () => Promise<void>;
 }
 
-export const useCandidates = (): UseCandidatesReturn => {
+export const useCandidates = (filters?: CandidateFilters): UseCandidatesReturn => {
   const [candidates, setCandidates] = useState<CandidateWithCV[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,8 +20,13 @@ export const useCandidates = (): UseCandidatesReturn => {
     setError(null);
 
     try {
-      const response = await candidateApi.fetchCandidates();
-        console.log(response);
+      const cleanFilters = {
+        country: filters?.country || undefined,
+        city: filters?.city || undefined,
+        english_level: filters?.english_level || undefined,
+      };
+
+      const response = await candidateApi.fetchCandidates(cleanFilters);
       if (response.success && response.data) {
         setCandidates(response.data);
       } else {
@@ -42,7 +48,7 @@ export const useCandidates = (): UseCandidatesReturn => {
 
   useEffect(() => {
     fetchCandidates();
-  }, []);
+  }, [filters?.country, filters?.city, filters?.english_level]);
 
   return {
     candidates,
