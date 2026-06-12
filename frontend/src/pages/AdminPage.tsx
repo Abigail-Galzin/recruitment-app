@@ -1,3 +1,5 @@
+import AdminPanel from '../components/AdminPanel/AdminPanel';
+
 export default function AdminPage() {
-  return <div>Admin Page (Placeholder)</div>;
+  return <AdminPanel />;
 }

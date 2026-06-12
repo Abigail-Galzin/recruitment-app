@@ -7,12 +7,13 @@ import candidateApi from '../../api/candidateApi';
 import { ENGLISH_LEVELS, ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/constants';
 import { formatFileSize } from '../../utils/validation';
 import type { RegistrationFormProps } from './types';
+import type { RegistrationFormData } from '../../types';
 
 export default function RegistrationForm({ onSuccess }: RegistrationFormProps) {
   const [successMessage, setSuccessMessage] = useState('');
   const [submitError, setSubmitError] = useState('');
 
-  const handleFormSubmit = async (formData) => {
+  const handleFormSubmit = async (formData: RegistrationFormData) => {
     setSubmitError('');
     setSuccessMessage('');
 

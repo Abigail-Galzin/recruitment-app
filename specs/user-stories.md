@@ -30,11 +30,13 @@
 **I want to** view a master list of all registered candidates in a table with color-coded language highlights  
 **So that** I can quickly scan and assess the talent pool.
 
-> **Scenario: Accessing the admin table with traffic-light status system active** >  
+> **Scenario: Accessing the admin table with traffic-light status system active**  
 > **Given** candidates exist in the system with "B2+", "B1", and "A2" English levels  
 > **When** the administrator navigates to the Admin Panel dashboard  
 > **Then** the system should display a data table containing all candidates  
-> **And** the English Level indicator for "B2+" must be highlighted in **Green** > **And** the English Level indicator for "B1" must be highlighted in **Yellow** > **And** the English Level indicator for "A2" must be highlighted in **Red**.
+> **And** the English Level indicator for "B2+" must be highlighted in **Green**. 
+> **And** the English Level indicator for "B1" must be highlighted in **Yellow**. 
+> **And** the English Level indicator for "A2" must be highlighted in **Red**.
 
 ---
 

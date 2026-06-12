@@ -110,24 +110,29 @@ export class CandidateService {
    */
   async getAllCandidates(filters: CandidateFilters) {
     let sql = `
-      SELECT c.*, cv.file_name, cv.file_path
+      SELECT c.*,
+      CASE 
+        WHEN cv.id IS NOT NULL THEN json_object('file_name', cv.file_name, 'file_path', cv.file_path)
+        ELSE NULL
+      END AS cv_document
       FROM CANDIDATE c
       LEFT JOIN CV_DOCUMENT cv ON c.id = cv.candidate_id
       WHERE 1=1
     `;
-    const params: any[] = [];
+
+    const params: string[] = [];
 
     if (filters.country) {
-      sql += ' AND c.country = ?';
-      params.push(filters.country);
+      sql += ' AND LOWER(c.country) LIKE ?';
+      params.push(`%${filters.country}%`);
     }
     if (filters.city) {
-      sql += ' AND c.city = ?';
-      params.push(filters.city);
+      sql += ' AND LOWER(c.city) LIKE ?';
+      params.push(`%${filters.city}%`);
     }
     if (filters.english_level) {
       sql += ' AND c.english_level = ?';
-      params.push(filters.english_level.toUpperCase());
+      params.push(filters.english_level);
     }
 
     sql += ' ORDER BY c.created_at DESC';

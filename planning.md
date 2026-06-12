@@ -18,8 +18,8 @@
 - [x] Set up database migrations structure (`backend/src/db/migrations/`)
 
 ### API Endpoints - Core Implementation
-- [ ] Define shared TypeScript types and interfaces (`backend/src/types/index.ts`)
-- [ ] Create validation schemas for candidate data (`backend/src/validators/schemas.ts`, `candidateValidator.ts`)
+- [X] Define shared TypeScript types and interfaces (`backend/src/types/index.ts`)
+- [-] Create validation schemas for candidate data (`backend/src/validators/schemas.ts`, `candidateValidator.ts`)
 - [ ] Implement error handling middleware (`backend/src/middleware/errorHandler.ts`)
 - [X] Implement upload middleware with multer config (`backend/src/middleware/uploadMiddleware.ts`)
 - [X] Create data models for Candidate and CVDocument (`backend/src/models/`)
@@ -61,30 +61,30 @@
 - [ ] Add request logging and error handling
 
 ### Frontend Setup
-- [ ] Install frontend dependencies (react, react-dom, typescript, vite, axios or fetch helpers)
-- [ ] Create `.env` configuration for frontend (API base URL)
-- [ ] Set up Vite configuration and build scripts
+- [X] Install frontend dependencies (react, react-dom, typescript, vite, axios or fetch helpers)
+- [X] Create `.env` configuration for frontend (API base URL)
+- [X] Set up Vite configuration and build scripts
 - [ ] Create global styles (`frontend/src/styles/globals.css`)
-- [ ] Define shared types and interfaces (`frontend/src/types/index.ts`)
+- [X] Define shared types and interfaces (`frontend/src/types/index.ts`)
 
 ### Frontend - Registration Form (Public Route)
-- [ ] Create form component (`frontend/src/components/RegistrationForm/RegistrationForm.tsx`)
-- [ ] Implement form fields: name, email, phone, age, country, city, english_level, cv_file
-- [ ] Add client-side validation for each field:
+- [X] Create form component (`frontend/src/components/RegistrationForm/RegistrationForm.tsx`)
+- [X] Implement form fields: name, email, phone, age, country, city, english_level, cv_file
+- [X] Add client-side validation for each field:
   - Email: valid format (regex)
   - Phone: E.164 format
   - Age: 18-99 range
   - CV File: .pdf only, max 5MB
   - All fields: required
-- [ ] Create form types/interfaces (`frontend/src/components/RegistrationForm/types.ts`)
-- [ ] Implement custom hook for form state management (`frontend/src/hooks/useForm.ts`)
-- [ ] Create form styles (`frontend/src/components/RegistrationForm/RegistrationForm.module.css`)
-- [ ] Add loading states and error handling UI
-- [ ] Implement success confirmation message after submission
+- [X] Create form types/interfaces (`frontend/src/components/RegistrationForm/types.ts`)
+- [X] Implement custom hook for form state management (`frontend/src/hooks/useForm.ts`)
+- [X] Create form styles (`frontend/src/components/RegistrationForm/RegistrationForm.module.css`)
+- [X] Add loading states and error handling UI
+- [X] Implement success confirmation message after submission
 
 ### Frontend - API Integration
-- [ ] Create API client utilities (`frontend/src/api/apiClient.ts`)
-- [ ] Create candidate API functions (`frontend/src/api/candidateApi.ts`):
+- [X] Create API client utilities (`frontend/src/api/apiClient.ts`)
+- [-] Create candidate API functions (`frontend/src/api/candidateApi.ts`):
   - `submitCandidate(formData)` - POST /api/candidates
   - `fetchCandidates(filters)` - GET /api/candidates
   - `updateCandidateStatus(id, status)` - PUT /api/candidates/:id/status
@@ -93,15 +93,15 @@
 - [ ] Implement retry logic and timeout handling
 
 ### Frontend - Admin Panel (Candidates Table)
-- [ ] Create admin panel main component (`frontend/src/components/AdminPanel/AdminPanel.tsx`)
-- [ ] Implement candidate data table (`frontend/src/components/AdminPanel/CandidateTable.tsx`):
+- [X] Create admin panel main component (`frontend/src/components/AdminPanel/AdminPanel.tsx`)
+- [X] Implement candidate data table (`frontend/src/components/AdminPanel/CandidateTable.tsx`):
   - Display columns: Name, Email, Phone, Age, Country, City, English Level, Status
   - Render all candidate records from API
-- [ ] Implement traffic-light color coding for English Level:
+- [X] Implement traffic-light color coding for English Level:
   - Green (B2, C1, C2)
   - Yellow (B1)
   - Red (A1, A2)
-- [ ] Add table styling (`frontend/src/components/AdminPanel/AdminPanel.module.css`)
+- [X] Add table styling (`frontend/src/components/AdminPanel/AdminPanel.module.css`)
 
 ### Frontend - Admin Panel (Filter Controls)
 - [ ] Create filter controls component (`frontend/src/components/AdminPanel/FilterControls.tsx`)
@@ -147,7 +147,7 @@
 - [ ] Implement main App component with router (`frontend/src/App.tsx`)
 
 ### Frontend - Utility Functions
-- [ ] Create validation utilities (`frontend/src/utils/validation.ts`):
+- [X] Create validation utilities (`frontend/src/utils/validation.ts`):
   - Email validation regex
   - Phone validation (E.164)
   - Age range check (18-99)

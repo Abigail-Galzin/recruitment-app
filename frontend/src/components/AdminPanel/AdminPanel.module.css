@@ -1,0 +1,369 @@
+/* Admin Panel Container */
+.adminContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.adminHeader {
+  margin-bottom: 2rem;
+}
+
+.adminTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.adminSubtitle {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Loading Container */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Table Container */
+.tableContainer {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tableHead {
+  background-color: #f3f4f6;
+  border-bottom: 2px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+}
+
+.th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+  border-right: 1px solid #e5e7eb;
+}
+
+.th:last-child {
+  border-right: none;
+}
+
+.tableBody {
+  background-color: white;
+}
+
+.tableRow {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.td {
+  padding: 0.85rem;
+  color: #374151;
+  border-right: 1px solid #e5e7eb;
+  word-wrap: break-word;
+  max-width: 200px;
+}
+
+.td:last-child {
+  border-right: none;
+}
+
+/* Traffic Light Colors for English Level */
+.englishLevel {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  min-width: 50px;
+}
+
+/* Status Badge */
+.statusBadge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* View CV Button */
+.viewCVButton {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.viewCVButton:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+.viewCVButton:active {
+  transform: translateY(1px);
+}
+
+.noCV {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* No Data Message */
+.noDataMessage {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #6b7280;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.noDataMessage p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/*Filters **/
+.filterContainer{
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f9fafb ;
+  border-radius: 0.5rem;
+}
+
+.filterWrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters{
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+}
+.filterButton{
+  padding: 0.5rem 1rem;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .adminContainer {
+    padding: 1rem;
+  }
+
+  .adminTitle {
+    font-size: 1.5rem;
+  }
+
+  .adminSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .th,
+  .td {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    max-width: 120px;
+  }
+
+  .englishLevel,
+  .statusBadge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .viewCVButton {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .table {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .adminContainer {
+    padding: 0.75rem;
+  }
+
+  .adminTitle {
+    font-size: 1.25rem;
+  }
+
+  .adminSubtitle {
+    font-size: 0.85rem;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+  }
+
+  .th,
+  .td {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    max-width: 80px;
+  }
+
+  .englishLevel,
+  .statusBadge {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+    min-width: auto;
+  }
+
+  .viewCVButton {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .table {
+    font-size: 0.75rem;
+  }
+}
+
+/* Sticky Header for Horizontal Scrolling */
+.tableHead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #f3f4f6;
+}
+
+/* Print Styles */
+@media print {
+  .adminContainer {
+    padding: 0;
+  }
+
+  .adminHeader {
+    page-break-after: avoid;
+  }
+
+  .tableWrapper {
+    box-shadow: none;
+    border: none;
+  }
+
+  .table {
+    border-collapse: collapse;
+  }
+
+  .tableRow:hover {
+    background-color: white;
+  }
+
+  .th,
+  .td {
+    border: 1px solid #d1d5db;
+  }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+  .adminContainer {
+    color: #e5e7eb;
+  }
+
+  .adminTitle {
+    color: #f3f4f6;
+  }
+
+  .adminSubtitle {
+    color: #9ca3af;
+  }
+
+  .tableContainer {
+    background-color: #1f2937;
+  }
+
+  .tableHead {
+    background-color: #111827;
+    border-bottom-color: #374151;
+  }
+
+  .th {
+    color: #e5e7eb;
+    border-right-color: #374151;
+  }
+
+  .tableBody {
+    background-color: #1f2937;
+  }
+
+  .tableRow {
+    border-bottom-color: #374151;
+  }
+
+  .tableRow:hover {
+    background-color: #111827;
+  }
+
+  .td {
+    color: #d1d5db;
+    border-right-color: #374151;
+  }
+
+  .noDataMessage {
+    background-color: #1f2937;
+    color: #9ca3af;
+  }
+}
