@@ -71,3 +71,34 @@ On success, show a temporary success message (e.g., ‘Status updated’) and re
 Handle errors with ErrorAlert.
 Disable the dropdown during the update request.
 Integrate StatusDropdown into each row of CandidateTable.
+
+## US - 5: Backend
+Implement backend support for User Story 5 (Open PDF CV)
+In @file:index.ts , add middleware to serve static files from the @file:uploads  directory at the /uploads route.
+
+Use Express built-in express.static.
+Example: app.use('/uploads', express.static(path.join(__dirname, '../public/uploads'))).
+Ensure the path resolves correctly regardless of the current working directory (use path.resolve).
+Add error handling for missing files (Express will automatically send 404).
+No authentication or extra logic required.
+This will allow the frontend to open http://localhost:5000/uploads/{filename} directly in a new tab.
+Do not modify existing POST or GET endpoints.
+
+
+--
+Fix User Story 5 (Open PDF CV) end‑to‑end. Currently, clicking ‘View CV’ does not open the PDF. The frontend calls /api/uploads/{filename} but it fails. Implement the correct integration
+In backend/src/index.ts, add a static route to serve uploaded PDFs.
+
+The files are stored in backend/public/uploads/ (as defined in US1).
+Use express.static with the absolute path:
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads'))).
+Do not use /api/uploads – the API prefix is for JSON endpoints only. Static files should be served from /uploads/... directly.
+Ensure the server can access the directory (check permissions).
+After adding, restart the server.
+Verify by opening http://localhost:5000/uploads/some-uuid.pdf in a browser – it should render or download the PDF.
+
+
+## US - 5: Frontend
+Add a CVViewer component that shows a ‘View CV’ button linking to http://localhost:5000/api/uploads/{cv_file_path} (opens in new tab). Use target="_blank" and rel="noopener noreferrer".
+If the cvFileName is missing or null, disable the button and show a tooltip ‘No CV uploaded’.
+And the details of the implementation.

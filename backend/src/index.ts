@@ -19,6 +19,9 @@ app.use(express.json());
 // Serve static files from public directory
 app.use('/public', express.static(path.join(__dirname, '../public')));
 
+// Serve uploaded CV PDFs from the uploads directory
+app.use('/api/uploads', express.static(path.join(__dirname, '../public/uploads')));
+
 // Routes
 app.use('/api/candidates', candidateRoutes);
 

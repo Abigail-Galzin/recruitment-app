@@ -6,6 +6,7 @@ import StatusDropdown from './StatusDropdown';
 import ErrorAlert from '../Common/ErrorAlert';
 import styles from './AdminPanel.module.css';
 import { getStatusColor } from '../../utils/formatters';
+import CVViewer from './CVViewer';
 
 interface CandidateTableProps {
   candidates: CandidateWithCV[];
@@ -109,6 +110,7 @@ export default function CandidateTable({ candidates, refetch }: CandidateTablePr
           <tbody className={styles.tableBody}>
             {localCandidates.map((candidate) => {
               const englishLevelColor = getEnglishLevelColor(candidate.english_level);
+              console.log(candidate.cv_document)
 
               return (
                 <tr key={candidate.id} className={styles.tableRow}>
@@ -139,7 +141,7 @@ export default function CandidateTable({ candidates, refetch }: CandidateTablePr
                     />
                   </td>
                   <td className={styles.td}>
-                    CVViewer
+                    <CVViewer candidateName={candidate.name} filepath={candidate.cv_document?.file_path}/>
                   </td>
                   <td className={styles.td}>{formatDate(candidate.created_at)}</td>
                 </tr>

@@ -36,6 +36,7 @@ export interface CVDocument {
   candidate_id: string;
   file_name: string;
   file_size: number;
+  file_path: string;
   uploaded_at: string;
 }
 
