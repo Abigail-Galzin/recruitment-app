@@ -55,7 +55,7 @@ export default function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
   return (
     <div className={styles.wrapper}>
-      <h1>Registration Form</h1>
+      <h1 className={styles.registrationTitle}>Registration Form</h1>
       <div className={styles.container}>
         {successMessage && (
           <div className={styles.successMessage}>

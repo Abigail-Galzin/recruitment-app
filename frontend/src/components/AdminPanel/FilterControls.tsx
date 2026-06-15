@@ -38,7 +38,6 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
     }, DEBOUNCE_DELAY);
   };
 
-  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       if (countryTimeoutRef.current) clearTimeout(countryTimeoutRef.current);
@@ -47,7 +46,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
   }, []);
 
   return (
-    <div className={styles.filterCon}>
+    <div className={styles.filterContainer}>
       <div className={styles.filterWrapper}>
         <div>
           <label htmlFor="country-filter" style={{ display: 'block', fontWeight: 500, marginBottom: '0.5rem' }}>

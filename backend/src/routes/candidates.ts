@@ -23,4 +23,10 @@ router.post('/', uploadMiddleware, candidateController.createCandidate);
  */
 router.get('/', candidateController.getCandidates);
 
+/**
+ * PUT /api/candidates/:id/status
+ * Update candidate status
+ */
+router.put('/:id/status', candidateController.updateCandidateStatus);
+
 export default router;

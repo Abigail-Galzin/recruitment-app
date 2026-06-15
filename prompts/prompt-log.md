@@ -52,3 +52,22 @@ Handle loading (LoadingSpinner) and error states (ErrorAlert).
 For now, status change and filters are not required – just the table and traffic light.
 
 Use @file:AdminPanel.module.css  for styling the table (make it responsive with horizontal scroll on mobile), using CSS classes or inline styles.
+
+## US - 4 : Backend
+Implement User Story 4 backend in @file:candidates.ts and @file:candidateController.ts
+
+Add PUT /api/candidates/:id/status endpoint.
+Accept JSON body: { status: 'IN_REVIEW' | 'ACCEPTED' | 'REJECTED' }.
+Validate status enum, candidate existence, then update the status column and updated_at timestamp.
+Return 200 with updated candidate object or 404 if not found.
+Add the route to @file:index.ts Use the existing model function updateCandidateStatus(id, status) in @file:Candidate.ts
+
+## US - 4 : Frontend
+In @file:StatusDropdown.tsx implement User Story 4 frontend.
+
+For each row in CandidateTable, render a `` with options: IN_REVIEW, ACCEPTED, REJECTED.
+On change, call PUT /api/candidates/:id/status using axios (via @file:candidateApi.ts).
+On success, show a temporary success message (e.g., ‘Status updated’) and refresh the candidate list by calling refetch() from useCandidates.
+Handle errors with ErrorAlert.
+Disable the dropdown during the update request.
+Integrate StatusDropdown into each row of CandidateTable.

@@ -41,4 +41,19 @@ export type CreateCandidateInput = Omit<
   'id' | 'status' | 'created_at' | 'updated_at'
 >;
 
-export type CandidateResponse = Candidate;
+export type CandidateResponse = {
+  id: string,
+  name: string,
+  email: string,
+  phone: string,
+  age: string,
+  country: string,
+  city: string,
+  english_level: string,
+  status: string,
+  cv_file: {
+    file_name: string,
+    file_path: string,
+  },
+  created_at: string,
+};

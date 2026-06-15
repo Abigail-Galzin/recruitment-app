@@ -1,7 +1,7 @@
 import { useCandidates } from '../../hooks/useCandidates';
 import { useFilters } from '../../hooks/useFilters';
+import { FilterControls } from './FilterControls';
 import CandidateTable from './CandidateTable';
-import {FilterControls} from './FilterControls';
 import LoadingSpinner from '../Common/LoadingSpinner';
 import ErrorAlert from '../Common/ErrorAlert';
 import styles from './AdminPanel.module.css';
@@ -33,11 +33,11 @@ export default function AdminPanel() {
       )}
 
       <FilterControls
-        filters={filters}
-        setCountry={setCountry}
-        setCity={setCity}
-        setEnglishLevel={setEnglishLevel}
-        resetFilters={resetFilters}
+        filters = {filters}
+        setCountry = {setCountry}
+        setCity = {setCity}
+        setEnglishLevel = {setEnglishLevel}
+        resetFilters = {resetFilters}
       />
 
       {isLoading ? (
@@ -47,7 +47,7 @@ export default function AdminPanel() {
         </div>
       ) : (
         <div className={styles.tableContainer}>
-          <CandidateTable candidates={candidates} />
+          <CandidateTable candidates={candidates} refetch={refetch} />
         </div>
       )}
     </div>

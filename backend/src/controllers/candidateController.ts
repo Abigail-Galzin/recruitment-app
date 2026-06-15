@@ -105,4 +105,49 @@ export class CandidateController {
       });
     }
   };
+
+  /**
+   * Update candidate status
+   * PUT /api/candidates/:id/status
+   */
+  updateCandidateStatus = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+
+      const validStatuses = ['IN_REVIEW', 'ACCEPTED', 'REJECTED'];
+      if (!status || !validStatuses.includes(status)) {
+        res.status(400).json({
+          success: false,
+          error: 'Invalid status value',
+          details: `Status must be one of: ${validStatuses.join(', ')}`,
+        });
+        return;
+      }
+
+      const updatedCandidate = await this.candidateService.updateCandidateStatus(id.toString(), status);
+
+      if (!updatedCandidate) {
+        res.status(404).json({
+          success: false,
+          error: 'Candidate not found',
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Candidate status updated successfully',
+        data: updatedCandidate,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error('✗ Error updating candidate status:', message);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to update candidate status',
+        details: message,
+      });
+    }
+  };
 }
