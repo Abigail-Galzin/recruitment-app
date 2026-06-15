@@ -15,7 +15,7 @@ Implement the database schema required for @file:user-stories.md User Story 1 (R
  The database schema and connection files are ready, but the initialization logic is not running yet. focus on this files @ThirdChallenge/backend/src/db/connection.ts @ThirdChallenge/backend/src/index.ts to: 1. Import the database initialization funciton into @ThirdChallenge/backend/src/index.ts  , call the initialization  before the app.listen(5000) statement execution to ensure tables are created on startup. 2. Add proper error handling (try/catch) around the initialization call so the server logs any database startup failures and terminates gracefully if needed. 
  Do not implement any API endpoints yet
 
-
+## User Storie 1 backend chat
 Using the @file:connection.ts and following the @file:schema.ts Implement User Story 1(Candidate Registration) completely in the backend. Create endpoint POST /api/candidates that accepts multipart/form-data with all candidate fields + a PDF. Use multer middleware (file max 5MB, only PDF). Save the file to public/uploads/ with a UUID name. Insert into CANDIDATE and CV_DOCUMENT tables. Validate: age 18-99, email format, phone E.164, file required. Return 201 with candidate ID. Write the route in routes/candidates.ts, controller in controllers/candidateController.ts, model in models/Candidate.ts and models/CVDocument.ts, Also add the respective new routes in the @file:index.ts . After success, the candidate’s status should be ‘IN_REVIEW’ as per the story.
 
 
@@ -32,3 +32,23 @@ Use RegistrationForm.module.css for styling (mobile‑first CSS Grid or Flex).
 After successful registration, clear the form or redirect to a thank‑you page.
 Also create src/api/apiClient.ts with a configured axios instance pointing to http://localhost:5000.
 Write the necessary TypeScript types in src/types/index.ts matching the backend response.
+
+
+# 2nd story:  frontend
+Implement User Story 2 (View candidate list with traffic‑light colours) in the frontend.Create @sym:AdminPage that renders the @file:AdminPanel.tsx component.
+Inside @file:AdminPanel.tsx :
+
+Fetch candidates from GET /api/candidates using a custom hook useCandidates @file:useCandidates.ts
+
+Display the data in a table @file:CandidateTable.tsx component
+
+Apply traffic‑light colours to the English level column:Green for B2, C1, C2
+
+Yellow for B1
+
+Red for A1, A2
+
+Handle loading (LoadingSpinner) and error states (ErrorAlert).
+For now, status change and filters are not required – just the table and traffic light.
+
+Use @file:AdminPanel.module.css  for styling the table (make it responsive with horizontal scroll on mobile), using CSS classes or inline styles.

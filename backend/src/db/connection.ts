@@ -134,7 +134,11 @@ export const getAllRows = (sql: string, params: any[] = []): Promise<any[]> => {
       if (err) {
         reject(err);
       } else {
-        resolve(rows || []);
+        const result = rows.map(row => ({
+          ...row,
+          cv_document: row.cv_document ? JSON.parse(row.cv_document) : null
+        }));
+        resolve(result || []);
       }
     });
   });

@@ -46,7 +46,11 @@ export const candidateApi = {
     const response = await apiClient.get<ApiResponse<CandidateWithCV[]>>(
       `/api/candidates?${params.toString()}`
     );
-    return response.data;
+
+    return {
+        ...response.data,
+        success: (response.status  === 200)
+    }
   },
 
   /**

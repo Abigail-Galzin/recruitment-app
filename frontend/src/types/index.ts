@@ -34,7 +34,7 @@ export interface CandidateWithCV extends Candidate {
 export interface CVDocument {
   id: string;
   candidate_id: string;
-  filename: string;
+  file_name: string;
   file_size: number;
   uploaded_at: string;
 }
