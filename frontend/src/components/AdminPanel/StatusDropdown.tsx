@@ -1,4 +1,5 @@
 import type { CandidateStatus } from '../../types';
+import { getStatusColor } from '../../utils/formatters';
 
 interface StatusDropdownProps {
   currentStatus: CandidateStatus;
@@ -28,6 +29,7 @@ export default function StatusDropdown({
       }
     }
   };
+  const statusColors = getStatusColor(currentStatus);
 
   return (
     <select
@@ -39,7 +41,8 @@ export default function StatusDropdown({
         padding: '0.5rem 0.75rem',
         border: '1px solid #d1d5db',
         borderRadius: '0.375rem',
-        backgroundColor: 'white',
+        backgroundColor: statusColors.bg,
+        color: statusColors.text,
         cursor: disabled ? 'not-allowed' : 'pointer',
         fontSize: '0.95rem',
         opacity: disabled ? 0.6 : 1,

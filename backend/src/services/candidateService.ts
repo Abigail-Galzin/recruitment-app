@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { runQuery, getRow, getAllRows } from '../db/connection.js';
-import { CandidateFilters, CreateCandidateData } from '../models/Candidate.js';
+import { CandidateFilters, CandidateResponse, CreateCandidateData } from '../models/Candidate.js';
 import { FilePDFData } from '../models/CVDocument.js';
 
 export class CandidateService {
@@ -137,5 +137,26 @@ export class CandidateService {
 
     sql += ' ORDER BY c.created_at DESC';
     return await getAllRows(sql, params);
+  }
+
+  /**
+   * Update candidate status
+   */
+  async updateCandidateStatus(id: string, status: string): Promise<CandidateResponse | null> {
+    const now = new Date().toISOString();
+
+    const updateSQL = `
+      UPDATE CANDIDATE
+      SET status = ?, updated_at = ?
+      WHERE id = ? AND status IS NOT ?
+    `;
+
+    const result = await runQuery(updateSQL, [status, now, id, status]);
+
+    if (result.changes === 0) {
+      throw new Error('No changes made or candidate not found');
+    }
+
+    return this.getCandidateById(id);
   }
 }
