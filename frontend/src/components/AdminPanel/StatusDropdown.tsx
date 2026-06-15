@@ -24,7 +24,6 @@ export default function StatusDropdown({
         await onStatusChange(candidateId, newStatus);
       } catch (error) {
         console.error('Error updating status:', error);
-        // Reset to previous value on error
         e.target.value = currentStatus;
       }
     }

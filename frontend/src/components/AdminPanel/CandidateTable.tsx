@@ -5,6 +5,7 @@ import candidateApi from '../../api/candidateApi';
 import StatusDropdown from './StatusDropdown';
 import ErrorAlert from '../Common/ErrorAlert';
 import styles from './AdminPanel.module.css';
+import { getStatusColor } from '../../utils/formatters';
 
 interface CandidateTableProps {
   candidates: CandidateWithCV[];
@@ -16,11 +17,13 @@ export default function CandidateTable({ candidates, refetch }: CandidateTablePr
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [localCandidates, setLocalCandidates] = useState(candidates);
+  const [statusColor, setStatusColor] = useState<{ bg: string, text: string }>({ bg: '', text: '' });
 
   const handleStatusChange = async (candidateId: string, newStatus: CandidateStatus) => {
     setUpdatingId(candidateId);
     setErrorMessage(null);
     setSuccessMessage(null);
+    setStatusColor(getStatusColor(newStatus));
 
     try {
       const response = await candidateApi.updateCandidateStatus(candidateId, newStatus);
@@ -74,12 +77,11 @@ export default function CandidateTable({ candidates, refetch }: CandidateTablePr
       {successMessage && (
         <div
           style={{
-            backgroundColor: '#dcfce7',
-            color: '#166534',
+            backgroundColor: statusColor.bg || 'gray',
+            color: statusColor.text || 'gray',
             padding: '1rem',
             borderRadius: '0.375rem',
             marginBottom: '1rem',
-            border: '1px solid #86efac',
           }}
         >
           ✓ {successMessage}

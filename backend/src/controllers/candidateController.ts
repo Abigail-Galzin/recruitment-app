@@ -115,7 +115,6 @@ export class CandidateController {
       const { id } = req.params;
       const { status } = req.body;
 
-      // Validate status enum
       const validStatuses = ['IN_REVIEW', 'ACCEPTED', 'REJECTED'];
       if (!status || !validStatuses.includes(status)) {
         res.status(400).json({
@@ -135,7 +134,7 @@ export class CandidateController {
         });
         return;
       }
-      console.log(updatedCandidate);
+
       res.status(200).json({
         success: true,
         message: 'Candidate status updated successfully',
